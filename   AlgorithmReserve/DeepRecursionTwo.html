@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Recursion Two</title>
+</head>
+<body>
+<script type="text/javascript">
+    //Transform high-dimensional arrays into virtual DOM like models
+    let arr = [1, 2, 3, [4, 5, [6, 7, 8, [9, 10, 11]]]]
+
+    //Circulation method
+    function convert(arr) {
+        let resultArr = []
+        for (let i = 0; i < arr.length; i++) {
+            if (typeof arr[i] === "number") {
+                resultArr.push({
+                    value: arr[i]
+                })
+            } else if (Array.isArray(arr[i])) {
+                resultArr.push({
+                    children: convert(arr[i])
+                })
+            }
+        }
+        return resultArr
+    }
+
+    let result = convert(arr)
+    console.log(result)
+</script>
+</body>
+</html>

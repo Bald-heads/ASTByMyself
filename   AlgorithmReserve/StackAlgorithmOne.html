@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stack Algorithm One</title>
+</head>
+<body>
+<script type="text/javascript">
+    //Using the idea of stack to solve the problem that can only be repeated
+    //for example:
+    //3[2[a]2[b]] ===>> aabbaabbaabb and 3[2[a]2[b]] is a String
+    let templateString = "3[2[abc]2[ddd]]"
+
+    function smartRepeat(templateString) {
+        if (typeof templateString !== "string") {
+            throw new Error("Please enter a value of type string")
+        }
+        let index = 0
+        let stackNumber = []
+        let stackTemporaryString = []
+        let remainingString = templateString
+        while (index < templateString.length - 1) {
+            //Repeatedly replace the remaining strings
+            remainingString = templateString.substring(index)
+            //Use regular expressions to determine
+            //If the remaining string starts with a number and "[",
+            // we stack the number and stack the empty string
+            if (/^\d+\[/.test(remainingString)) {
+                let times = Number(remainingString.match(/^(\d+)\[/)[1])
+                stackNumber.push(times)
+                stackTemporaryString.push("")
+                index += times.toString().length + 1
+            }
+            //If the remaining string starts with letters and "]",
+            // we replace the empty string of the previous item with letters
+            else if (/^\w+]/.test(remainingString)) {
+                let words = remainingString.match(/^(\w+)]/)[1]
+                stackTemporaryString[stackTemporaryString.length - 1] = words
+                index += words.length
+            }
+            //Finally, if it ends with "]" , we double stack the number stack and the character stack,
+            //and generate multiple strings and then concatenate with the stack on the character stack
+            else if (remainingString[0] === ']') {
+                let number = stackNumber.pop()
+                let word = stackTemporaryString.pop()
+                stackTemporaryString[stackTemporaryString.length - 1] += word.repeat(number)
+                index++
+            }
+        }
+        //The return value of the function is a multifold concatenation
+        //of the last remaining items in the two stacks
+        return stackTemporaryString[0].repeat(stackNumber[0])
+    }
+
+    let result = smartRepeat(templateString)
+    console.log(result)
+</script>
+</body>
+</html>

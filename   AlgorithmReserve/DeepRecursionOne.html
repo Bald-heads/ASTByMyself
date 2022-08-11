@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Recursion One</title>
+</head>
+<body>
+<script type="text/javascript">
+    //Output the top 10 items of Fibonacci number series by recursion
+    //Using cache idea to solve redundant and redundant computation
+    let cache = {}
+    //Define counters
+    let counter = 0
+
+    function fib(n) {
+        if (cache.hasOwnProperty(n)) {
+            counter++
+            return cache[n]
+        }
+        //Calculate the cache object and store it in the cache object
+        let cacheObject = n === 0 || n === 1 ? 1 : fib(n - 1) + fib(n - 2)
+        cache[n] = cacheObject
+        return cacheObject
+    }
+
+    for (let i = 0; i <= 9; i++) {
+        console.log(fib(i))
+    }
+    console.log(`Hit cache (no calculation required),And hit cache ${counter} second`)
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

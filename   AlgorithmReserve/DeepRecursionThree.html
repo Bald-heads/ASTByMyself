@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Recursion Three</title>
+</head>
+<body>
+<script type="text/javascript">
+    //Transform high-dimensional arrays into virtual DOM like models
+    let arr = [1, 2, 3, [4, 5, [6, 7, 8, [9, 10, 11]]]]
+
+    //By mapping method
+    function convert(item) {
+        if (typeof item === "number") {
+            return {
+                value: item
+            }
+        } else if (Array.isArray(item)) {
+            return {
+                children: item.map(_item => convert(_item))
+            }
+        }
+    }
+
+    let result = convert(arr)
+    console.log(result)
+</script>
+</body>
+</html>

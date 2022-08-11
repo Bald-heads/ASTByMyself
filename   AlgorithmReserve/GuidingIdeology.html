@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guiding Ideology</title>
+</head>
+<body>
+<script type="text/javascript">
+    //Find the most consecutive and repeated characters in the string
+    let str = "aaaaaabbbbbbbcccccccccccccddddd"
+    //Pointer
+    let i = 0
+    let j = 1
+    //The most repeated and frequently used letter
+    let maxRepeat = 0
+    let maxLetter = ""
+    while (i <= str.length - 1) {
+        if (str[i] !== str[j]) {
+            if (j - i > maxRepeat) {
+                maxRepeat = j - i
+                maxLetter = str[i]
+            }
+            i = j
+        }
+        j++
+    }
+    console.log(`The most repeated is ${maxRepeat},and frequently used letter is ${maxLetter}`)
+</script>
+</body>
+</html>
